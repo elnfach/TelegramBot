@@ -34,19 +34,19 @@ namespace TelegramBot.Source
             string what = await _client.Login(loginInfo);
             if (what != null)
             {
-                switch (scene_id)
-                {
-                    case 0:
-                        RenderDesign.ShowSendCodePage();
-                        break;
-                    case 1:
-                        RenderDesign.ShowListBox();
-                        break;
-                }
+                
                 return;
             }
-           
-            
+            switch (scene_id)
+            {
+                case 0:
+                    RenderDesign.ShowSendCodePage();
+                    break;
+                case 1:
+                    RenderDesign.ShowListBox();
+                    break;
+            }
+
         }
 
         public static async void buttonGetChats_Click()
