@@ -51,6 +51,22 @@ namespace TelegramBot.Source
             var chats = await _client.Messages_GetAllDialogs();
             HistoryPage.listBox.Items.Clear();
 
+            var dialogs = await _client.Messages_GetAllDialogs();
+
+            foreach (var dialog in dialogs.dialogs)
+            {
+                switch(dialogs.UserOrChat(dialog))
+                {
+                    case User user when user.IsActive: Console.WriteLine("User " + user); break;
+                    case ChatBase chatBase when chatBase.IsActive: Console.WriteLine(chatBase); break;
+                }
+            }
+            foreach (KeyValuePair<long, User> entry in chats.users)
+            {
+                Console.WriteLine($"${entry.Key} : {entry.Value}");
+            }
+
+            Console.Write("Choose a chat id: ");
             long chatId = long.Parse(Console.ReadLine());
 
             InputPeer peer = chats.users[chatId];
