@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TelegramBot.Source;
 
 namespace TelegramBot
 {
@@ -15,6 +16,12 @@ namespace TelegramBot
         public Form1()
         {
             InitializeComponent();
+            RenderDesign.Init(this);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
