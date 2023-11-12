@@ -10,16 +10,20 @@ namespace TelegramBot.Source
 {
     internal static class RenderDesign
     {
+        private static Form _form = null;
         private static AuthorizationPage authorizationPage = null;
+        private static SendCodePage sendCodePage = null;
 
         public static void Init(Form form)
         {
+            _form = form;
             authorizationPage = new AuthorizationPage(form);
         }
 
-        public static void ShowButtonSendCode()
+        public static void ShowSendCodePage()
         {
-
+            authorizationPage.Hide();
+            sendCodePage = new SendCodePage(_form);
         }
     }
 }

@@ -7,73 +7,57 @@ using System.Windows.Forms;
 
 namespace TelegramBot.Source.pages
 {
-    internal class AuthorizationPage
+    internal class SendCodePage
     {
         Form _form = null;
 
-        Panel authorizationPanel = null;
-        Label apiID = null;
-        Label apiHash = null;
-        Label phone = null;
-        TextBox textBoxApiID = null;
-        TextBox textBoxApiHash = null;
-        TextBox textBoxPhone = null;
+        Panel sendCodePanel = null;
+        Label code = null;
+        Label password = null;
+        TextBox textBoxCode = null;
+        TextBox textBoxPassword = null;
         Button buttonLogin = null;
 
-        public AuthorizationPage(Form form)
+        public SendCodePage(Form form)
         {
-            _form = form;
-            authorizationPanel = new Panel
+            sendCodePanel = new Panel
             {
                 Visible = true,
                 Anchor = System.Windows.Forms.AnchorStyles.Top,
                 BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(237)))), ((int)(((byte)(231))))),
                 Location = new System.Drawing.Point(115, 40),
-                Name = "authorizationPanel",
+                Name = "sendCodePanel",
                 Size = new System.Drawing.Size(696, 384),
                 TabIndex = 0
             };
 
-            apiID = new Label
+            code = new Label
             {
                 AutoSize = true,
                 BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(237)))), ((int)(((byte)(231))))),
                 Font = new System.Drawing.Font("Bahnschrift", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204))),
                 ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(23))))),
                 Location = new System.Drawing.Point(30, 100),
-                Name = "apiID",
+                Name = "code",
                 Size = new System.Drawing.Size(115, 34),
                 TabIndex = 2,
-                Text = "API ID: "
+                Text = "Code: "
             };
 
-            apiHash = new Label
+            password = new Label
             {
                 AutoSize = true,
                 BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(237)))), ((int)(((byte)(231))))),
                 Font = new System.Drawing.Font("Bahnschrift", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204))),
                 ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(23))))),
                 Location = new System.Drawing.Point(30, 142),
-                Name = "apiHash",
+                Name = "password",
                 Size = new System.Drawing.Size(115, 34),
                 TabIndex = 2,
-                Text = "API Hash: "
+                Text = "Password: "
             };
 
-            phone = new Label
-            {
-                AutoSize = true,
-                BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(237)))), ((int)(((byte)(231))))),
-                Font = new System.Drawing.Font("Bahnschrift", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204))),
-                ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(23))))),
-                Location = new System.Drawing.Point(30, 184),
-                Name = "phone",
-                Size = new System.Drawing.Size(115, 34),
-                TabIndex = 2,
-                Text = "Phone: "
-            };
-
-            textBoxApiID = new TextBox
+            textBoxCode = new TextBox
             {
                 BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(239))))),
                 ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(23))))),
@@ -83,31 +67,19 @@ namespace TelegramBot.Source.pages
                 TabIndex = 6,
                 Text = null
             };
-            textBoxApiID.KeyPress += new KeyPressEventHandler(textBoxApiID_KeyPress);
+            textBoxCode.KeyPress += new KeyPressEventHandler(textBoxCode_KeyPress);
 
-            textBoxApiHash = new TextBox()
+            textBoxPassword = new TextBox()
             {
                 BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(239))))),
                 ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(23))))),
                 Location = new System.Drawing.Point(150, 147),
-                Name = "textBoxApiHash",
+                Name = "textBoxPassword",
                 Size = new System.Drawing.Size(152, 22),
                 TabIndex = 6,
                 Text = null
             };
-            textBoxApiHash.KeyPress += new KeyPressEventHandler(textBoxApiHash_KeyPress);
-
-            textBoxPhone = new TextBox()
-            {
-                BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(239))))),
-                ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(23))))),
-                Location = new System.Drawing.Point(150, 189),
-                Name = "textBoxPhone",
-                Size = new System.Drawing.Size(152, 22),
-                TabIndex = 6,
-                Text = null
-            };
-            textBoxPhone.KeyPress += new KeyPressEventHandler(textBoxPhone_KeyPress);
+            textBoxPassword.KeyPress += new KeyPressEventHandler(textBoxPassword_KeyPress);
 
             buttonLogin = new Button
             {
@@ -124,55 +96,35 @@ namespace TelegramBot.Source.pages
             };
             buttonLogin.Click += new EventHandler(buttonLogin_Click);
 
-            authorizationPanel.Controls.Add(apiID);
-            authorizationPanel.Controls.Add(apiHash);
-            authorizationPanel.Controls.Add(phone);
-            authorizationPanel.Controls.Add(textBoxApiHash);
-            authorizationPanel.Controls.Add(textBoxApiID);
-            authorizationPanel.Controls.Add(textBoxPhone);
-            authorizationPanel.Controls.Add(buttonLogin);
+            sendCodePanel.Controls.Add(code);
+            sendCodePanel.Controls.Add(password);
+            sendCodePanel.Controls.Add(textBoxCode);
+            sendCodePanel.Controls.Add(textBoxPassword);
+            sendCodePanel.Controls.Add(buttonLogin);
 
-            form.Controls.Add(authorizationPanel);
+            form.Controls.Add(sendCodePanel);
         }
-
         public void Hide()
         {
             _form.Controls.Clear();
         }
 
-        private void textBoxPhone_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            /*char number = e.KeyChar;
-
-            if (!Char.IsDigit(number) && number != 8 && number != 43)
-            {
-                e.Handled = true;
-            }*/
-        }
-
-        private void textBoxApiHash_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
-        private void textBoxApiID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            /*char number = e.KeyChar;
-
-            if (!Char.IsDigit(number) && number != 8)
-            {
-                e.Handled = true;
-            }*/
-        }
-
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            if (textBoxApiID.Text != "" && textBoxApiHash.Text != "" && textBoxPhone.Text != "")
+            if (textBoxCode.Text != "")
             {
-                Authorization.Auth(textBoxPhone.Text, textBoxApiID.Text, textBoxApiHash.Text);
+                Authorization.SendCode(textBoxCode.Text);
                 return;
             }
             MessageBox.Show("Заполните поля!");
+        }
+
+        private void textBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void textBoxCode_KeyPress(object sender, KeyPressEventArgs e)
+        {
         }
     }
 }

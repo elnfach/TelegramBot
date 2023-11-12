@@ -95,6 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Authorization.cs" />
     <Compile Include="Source\pages\AuthorizationPage.cs" />
+    <Compile Include="Source\pages\SendCodePage.cs" />
     <Compile Include="Source\RenderDesign.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
