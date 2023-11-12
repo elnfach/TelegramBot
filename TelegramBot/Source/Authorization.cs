@@ -34,19 +34,11 @@ namespace TelegramBot.Source
             string what = await _client.Login(loginInfo);
             if (what != null)
             {
-                
+                RenderDesign.ShowSendCodePage();
                 return;
             }
-            switch (scene_id)
-            {
-                case 0:
-                    RenderDesign.ShowSendCodePage();
-                    break;
-                case 1:
-                    RenderDesign.ShowListBox();
-                    break;
-            }
 
+            RenderDesign.ShowListBox();
         }
 
         public static async void buttonGetChats_Click()
@@ -56,14 +48,27 @@ namespace TelegramBot.Source
                 MessageBox.Show("You must login first.");
                 return;
             }
-            var chats = await _client.Messages_GetAllChats();
+            var chats = await _client.Messages_GetAllDialogs();
             HistoryPage.listBox.Items.Clear();
-            foreach (var chat in chats.chats.Values)
-                if (chat.IsActive)
+
+            long chatId = long.Parse(Console.ReadLine());
+
+            InputPeer peer = chats.users[chatId];
+            for (int offset_id = 0; ;)
+            {
+                var messages = await _client.Messages_GetHistory(peer, offset_id);
+                if (messages.Messages.Length == 0) break;
+                foreach (var msgBase in messages.Messages)
                 {
-                    Console.WriteLine(chat);
-                    HistoryPage.listBox.Items.Add(chat);
+                    var from = messages.UserOrChat(msgBase.From ?? msgBase.Peer);
+
+                    if ( msgBase is TL.Message msg)
+                    {
+                        Console.WriteLine($"{from}> {msg.message} {msg.media} {msg.date} UTC");
+                        HistoryPage.listBox.Items.Add($"{from}> {msg.message} {msg.media} {msg.date} UTC");
+                    }
                 }
+            }
         }
     }
 }
