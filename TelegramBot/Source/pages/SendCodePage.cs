@@ -20,6 +20,7 @@ namespace TelegramBot.Source.pages
 
         public SendCodePage(Form form)
         {
+            _form = form;
             sendCodePanel = new Panel
             {
                 Visible = true,

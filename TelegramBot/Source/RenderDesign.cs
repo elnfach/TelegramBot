@@ -13,6 +13,7 @@ namespace TelegramBot.Source
         private static Form _form = null;
         private static AuthorizationPage authorizationPage = null;
         private static SendCodePage sendCodePage = null;
+        private static HistoryPage historyPage = null;
 
         public static void Init(Form form)
         {
@@ -24,6 +25,12 @@ namespace TelegramBot.Source
         {
             authorizationPage.Hide();
             sendCodePage = new SendCodePage(_form);
+        }
+
+        public static void ShowListBox()
+        {
+            sendCodePage.Hide();
+            historyPage = new HistoryPage(_form);
         }
     }
 }
